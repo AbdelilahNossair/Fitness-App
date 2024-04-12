@@ -58,11 +58,3 @@ After launching the app, navigate through the screens:
 ## Contributing
 
 Contributions are welcome! Please read the contributing guide on the repository for guidelines on how to contribute effectively.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-This README provides an overview of your Fitness App, guiding users through installation, features, and usage. It's structured to help both users and potential contributors understand and navigate the app efficiently.
