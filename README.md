@@ -1,60 +1,71 @@
 # Fitness App
 
-## Overview
+An Expo/React Native exercise-browser app. Users choose a muscle group, retrieve exercises from API Ninjas, and open an exercise detail view. The interface includes a welcome screen, image carousel, body-part cards, and animated transitions.
 
-This Fitness App is a React Native application designed to help users achieve their fitness goals through personalized workout routines and exercises. It utilizes responsive design elements to ensure a smooth user experience on different devices, and incorporates advanced animations to enhance interactivity.
+## What is implemented
 
-## Features
+- File-based screens through Expo Router.
+- Muscle-group selection and exercise listing.
+- Exercise details based on remote API records.
+- Responsive sizing, gradients, and Reanimated transitions.
 
-- **Home Screen:** Displays personalized greetings, workout suggestions, and notifications.
-- **Workout Selection:** Users can select workouts based on different body parts.
-- **Exercise Details:** Detailed information about exercises, including necessary equipment, difficulty levels, and step-by-step instructions.
-- **Interactive Animations:** Uses React Native Reanimated for dynamic effects like fading and sliding transitions.
-- **Responsive Design:** Utilizes `react-native-responsive-screen` for scaling the layout across different devices.
+This repository is an exercise-browsing prototype. It does not establish a personalized training-plan engine, activity tracking, or a production account backend.
 
-## Installation
+## Stack
 
-To run this app, follow these steps:
+The manifest specifies Expo ~50.0.14, React Native 0.73.6, React 18.2, Expo Router ~3.4.8, NativeWind, Axios, and Reanimated ~3.6.2. These are the repository's versions; do not assume current Expo Go releases support the project unchanged.
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://your-repository-url.com
-   ```
+## Setup
 
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/AbdelilahNossair/Fitness-App.git
+cd Fitness-App
+npm install
+npm start
+```
 
-3. **Run the App:**
-   ```bash
-   expo start
-   ```
+Use a Node/npm version compatible with Expo SDK 50. Run on a compatible device client/development build, Android emulator, or iOS simulator. The iOS simulator requires macOS and Xcode; Android requires an Android development environment.
 
-## Usage
+Additional scripts:
 
-After launching the app, navigate through the screens:
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-- **Get Started:** Tap 'Get Started' to proceed from the welcome screen to the home screen.
-- **Choose a Workout:** Select a body part on the home screen to see relevant exercises.
-- **View Exercise Details:** Tap on an exercise to view its details and instructions.
-- **Back Navigation:** Use the back arrow to return to previous screens.
+If a current client reports an SDK mismatch, use an SDK-compatible development environment or perform a deliberate Expo upgrade.
 
-## Technical Details
+## Exercise API configuration
 
-- **Expo SDK:** Leverages the Expo framework for rapid development and testing.
-- **React Navigation:** Utilizes `expo-router` for handling in-app navigation.
-- **External APIs:** Fetches exercise data from an external API to populate the list of exercises.
+`api/exerciseDB.js` requests:
 
-## Dependencies
+```text
+GET https://api.api-ninjas.com/v1/exercises?muscle=<bodyPart>
+X-Api-Key: <your API Ninjas key>
+```
 
-- React Native
-- Expo
-- react-native-reanimated
-- react-native-responsive-screen
-- expo-linear-gradient
-- expo-router
+The key is imported as `ApiKey` from `constants/index.js`. Supply your own authorized configuration in a local copy and avoid committing credentials. A value bundled into a mobile/web client is visible to users; use a backend proxy if the key needs to remain private.
 
-## Contributing
+API access, availability, and account limits determine whether exercises load. The helper logs failures and can return undefined instead of a structured error, so an empty screen may indicate configuration or network failure.
 
-Contributions are welcome! Please read the contributing guide on the repository for guidelines on how to contribute effectively.
+## Code map
+
+| Path | Responsibility |
+| --- | --- |
+| `app/index.jsx` | Welcome/entry screen |
+| `app/home.jsx` | Main exercise-browsing interface |
+| `app/exercises.jsx` | Selected-group results |
+| `app/exerciseDetails.jsx` | Exercise detail presentation |
+| `app/_layout.jsx` | Router layout |
+| `components/BodyParts.jsx` | Muscle-group choices |
+| `components/ExerciseList.jsx` | Exercise cards/list |
+| `components/ImageSlider.jsx` | Carousel |
+| `api/exerciseDB.js` | Axios wrapper and external requests |
+| `constants/index.js` | Shared data/configuration |
+
+## User flow and checks
+
+Start the app, proceed through the welcome screen, choose a body part, open an exercise, and navigate back. Test both a successful API response and a failed request. Check small-screen layout and platform-specific animations.
+
+`npm test` starts Jest in watch mode using the jest-expo preset; the presence of this script does not establish meaningful test coverage. No dependency lockfile or standalone project license is included in the reviewed tree. Useful next steps are loading/error states, validated API response handling, and a supported Expo upgrade.
