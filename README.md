@@ -68,4 +68,4 @@ API access, availability, and account limits determine whether exercises load. T
 
 Start the app, proceed through the welcome screen, choose a body part, open an exercise, and navigate back. Test both a successful API response and a failed request. Check small-screen layout and platform-specific animations.
 
-`npm test` starts Jest in watch mode using the jest-expo preset; the presence of this script does not establish meaningful test coverage. No dependency lockfile or standalone project license is included in the reviewed tree. Useful next steps are loading/error states, validated API response handling, and a supported Expo upgrade.
+`npm test` starts Jest in watch mode using the jest-expo preset; the presence of this script does not establish meaningful test coverage. A package-lock.json is included, but no standalone project license is present. Useful next steps are loading/error states, validated API response handling, and a supported Expo upgrade.
